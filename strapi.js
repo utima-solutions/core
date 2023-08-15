@@ -21,7 +21,7 @@ http
           .digest('hex');
 
       if (req.headers['x-hub-signature'] == sig) {
-        exec(`cd ${repo} && git pull && NODE_ENV=production npm run build  && ${PM2_CMD}`);
+        exec(`cd ${repo} && git stash && git pull && NODE_ENV=production npm run build  && ${PM2_CMD}`);
       }
     });
 
