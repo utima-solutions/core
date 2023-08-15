@@ -9,9 +9,7 @@ const exec = require('child_process').exec;
 
 const GIT_CMD = `git stash && git pull`;
 const BUILD_CMD = `npm ci && NODE_ENV=production npm run build`;
-
-const PM2_PATH = 'sudo env PATH=$PATH:[PATH]';
-const PM2_CMD = `cd ~ && ${PM2_PATH} && pm2 save`;
+const PM2_CMD = `cd ~ && pm2 save`;
 
 http
   .createServer(function(req, res) {
