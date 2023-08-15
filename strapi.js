@@ -7,6 +7,9 @@ const http = require('http');
 const crypto = require('crypto');
 const exec = require('child_process').exec;
 
+const GIT_CMD = `git stash && git pull`;
+const BUILD_CMD = `npm ci && NODE_ENV=production npm run build`;
+
 const PM2_PATH = 'sudo env PATH=$PATH:[PATH]';
 const PM2_CMD = `cd ~ && ${PM2_PATH} && pm2 save`;
 
@@ -21,7 +24,7 @@ http
           .digest('hex');
 
       if (req.headers['x-hub-signature'] == sig) {
-        exec(`cd ${repo} && git stash && git pull && NODE_ENV=production npm run build  && ${PM2_CMD}`);
+        exec(`cd ${repo} && ${GIT_CMD} && ${BUILD_CMD} && ${PM2_CMD}`);
       }
     });
 
