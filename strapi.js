@@ -25,7 +25,7 @@ async function runPipeline() {
       shell('git pull');
       shell('npm ci');
       shell('NODE_ENV=production npm run build');
-      shell('pm2 restart strapi-app');
+      shell('/home/admin/.npm-global/bin/pm2 restart strapi-app');
       resolve();
     } catch (error) {
       console.error(error);
