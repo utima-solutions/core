@@ -10,10 +10,10 @@
     "strict": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    "outDir": "./dist",
     "jsx": "react-jsx",
     "typeRoots": [
-      "./node_modules/@types",
-      // "./node_modules/@utima"
+      "./node_modules/@types"
     ],
   }
 }

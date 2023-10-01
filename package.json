@@ -2,9 +2,11 @@
   "name": "@utima/core",
   "version": "1.0.0",
   "scripts": {
+    "turbo": "turbo",
     "changeset": "changeset add",
     "postinstall": "npm run build",
-    "build": "npm run build --workspaces --if-present",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
     "release": "changeset publish",
     "release:rc:enter": "changeset pre enter rc",
     "release:rc:exit": "changeset pre exit"

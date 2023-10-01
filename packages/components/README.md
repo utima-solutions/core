@@ -1,6 +1,6 @@
 # @utima/components
 
-Collection of React components used by Utima based on Ant Design.
+Collection of React components used by Utima based on [Ant Design](https://ant.design/).
 
 ## Install
 

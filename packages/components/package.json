@@ -4,10 +4,12 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
+    "lint": "eslint './**/*.{js,jsx,ts,tsx,cjs,mjs}'",
     "build": "tsc -b",
     "ev": "tsc -w"
   },
   "dependencies": {
-    "antd": "^5.9.4"
+    "antd": "^5.9.4",
+    "turbo": "^1.10.14"
   }
 }
