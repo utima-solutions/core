@@ -9,8 +9,7 @@
     "dev": "tsc -w"
   },
   "dependencies": {
-    "antd": "^5.9.4",
-    "turbo": "^1.10.14"
+    "antd": "^5.9.4"
   },
   "peerDependencies": {
     "react": ">=18",
