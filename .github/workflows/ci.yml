@@ -22,7 +22,7 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - name: Install Dependencies
+      - name: Install & Build Dependencies
         run: npm ci
 
       - name: Run lint
