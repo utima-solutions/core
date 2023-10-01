@@ -1,0 +1,19 @@
+{
+  "name": "@utima/core",
+  "version": "1.0.0",
+  "description": "### Show logs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "./packages/*"
+  ],
+  "devDependencies": {
+    "@utima/eslint-config": "^0.2.1",
+    "eslint": "^8.50.0"
+  }
+}

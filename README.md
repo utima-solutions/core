@@ -1,5 +1,8 @@
-# core-webhooks
+# @utima/core
 
-### Show logs
 
-`journalctl -u webhook`
+## Contribution
+
+```bash
+npm i
+```
