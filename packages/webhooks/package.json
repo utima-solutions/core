@@ -1,4 +1,7 @@
 {
   "name": "@utima/webhooks",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "scripts": {
+    "lint": "eslint './**/*.{js,jsx,ts,tsx,cjs,mjs}'"
+  }
 }

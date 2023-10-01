@@ -6,10 +6,14 @@
   "scripts": {
     "lint": "eslint './**/*.{js,jsx,ts,tsx,cjs,mjs}'",
     "build": "tsc -b",
-    "ev": "tsc -w"
+    "dev": "tsc -w"
   },
   "dependencies": {
     "antd": "^5.9.4",
     "turbo": "^1.10.14"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
   }
 }
