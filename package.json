@@ -1,19 +1,23 @@
 {
   "name": "@utima/core",
   "version": "1.0.0",
-  "description": "### Show logs",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "changeset": "changeset add",
+    "postinstall": "npm run build",
+    "build": "npm run build --workspaces --if-present",
+    "release": "changeset publish",
+    "release:rc:enter": "changeset pre enter rc",
+    "release:rc:exit": "changeset pre exit"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "workspaces": [
     "./packages/*"
   ],
   "devDependencies": {
+    "@changesets/changelog-github": "^0.4.8",
+    "@changesets/cli": "^2.26.2",
     "@utima/eslint-config": "^0.2.1",
-    "eslint": "^8.50.0"
+    "eslint": "^8.50.0",
+    "typescript": "^5.2.2"
   }
 }
