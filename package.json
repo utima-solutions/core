@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "scripts": {
     "turbo": "turbo",
-    "changeset": "changeset add",
     "postinstall": "npm run build",
     "build": "turbo run build",
     "lint": "turbo run lint",
-    "release": "changeset publish",
+    "changeset": "changeset add",
+    "release": "npm run release:prepare && npm run release:push && changeset publish",
+    "release:prepare": "changeset version && npm i --package-lock-only --ignore-scripts",
+    "release:push": "git add . && git commit -m 'Publish' && changeset tag && git push --follow-tags",
     "release:rc:enter": "changeset pre enter rc",
     "release:rc:exit": "changeset pre exit"
   },
