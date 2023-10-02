@@ -1,6 +1,6 @@
 {
   "name": "@utima/webhooks",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "scripts": {
     "lint": "ESLINT_USE_FLAT_CONFIG=true eslint -c ../../eslint.config.mjs './**/*.{js,ts,jsx,tsx,cjs,mjs}'"
   }
