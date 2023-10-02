@@ -3,15 +3,16 @@
 const secret = 'ghp_utima_push'; // created in GitHub earlier
 const repo = '/home/[USER]/[PROJECT_NAME]';
 
+const childProcess = require('child_process');
 const crypto = require('crypto');
 const http = require('http');
-const childProcess = require('child_process');
 
 // const PM2_PATH =
 //   'sudo env PATH=$PATH:/home/admin/.nvm/versions/node/v16.14.0/bin /home/admin/.npm-global/lib/node_modules/pm2/';
 // const PM2_CMD = `cd ~ && pm2 save && pm2 restart strapi-app`;
 
 function shell(cmd) {
+  // eslint-disable-next-line no-console
   console.log('Running:', cmd);
   childProcess.execSync(cmd, { stdio: 'inherit', cwd: repo });
 }
@@ -37,7 +38,7 @@ let pipeline = null;
 
 http
   .createServer((req, res) => {
-    req.on('data', (chunk) => {
+    req.on('data', chunk => {
       let sig =
         'sha1=' +
         crypto
@@ -66,6 +67,5 @@ http
     req.on('end', () => {
       res.end();
     });
-
   })
   .listen(8080);
