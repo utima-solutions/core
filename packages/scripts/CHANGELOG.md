@@ -1,5 +1,11 @@
 # @utima/scripts
 
+## 0.0.4
+
+### Patch Changes
+
+- [`dbca80c`](https://github.com/utima-solutions/core/commit/dbca80cd78306001cda36f08170bfa1ca365adbb) Thanks [@jsimck](https://github.com/jsimck)! - Fixed issue with npm install in release script
+
 ## 0.0.3
 
 ### Patch Changes
