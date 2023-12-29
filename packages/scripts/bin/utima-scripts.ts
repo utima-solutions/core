@@ -14,8 +14,7 @@ const { version, description } = await parsePkgJson(
   resolve(__dirname + '../../../package.json'),
 );
 
-// Init CLI
-program.name('utima-scripts').version(version!).description(description!);
+program.name('utima').version(version!).description(description!);
 
 // Init scripts
 scriptCreators.forEach(creator => creator(program));
