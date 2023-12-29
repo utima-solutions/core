@@ -1,5 +1,11 @@
 # @utima/scripts
 
+## 0.1.1
+
+### Patch Changes
+
+- [`f2332e7`](https://github.com/utima-solutions/core/commit/f2332e72571a9ac59baf7305dfab0b2238bc9e5c) Thanks [@jsimck](https://github.com/jsimck)! - Make dev branch optional in release script
+
 ## 0.1.0
 
 ### Minor Changes
