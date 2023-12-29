@@ -1,5 +1,11 @@
 # @utima/utils
 
+## 0.1.1
+
+### Patch Changes
+
+- [`d2bece7`](https://github.com/utima-solutions/core/commit/d2bece74b33a269147bfdb7bfbb7a97a97763eeb) Thanks [@jsimck](https://github.com/jsimck)! - Added missing npmignore
+
 ## 0.1.0
 
 ### Minor Changes

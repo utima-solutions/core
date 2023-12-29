@@ -1,5 +1,11 @@
 # @utima/scripts
 
+## 0.0.8
+
+### Patch Changes
+
+- [`d2bece7`](https://github.com/utima-solutions/core/commit/d2bece74b33a269147bfdb7bfbb7a97a97763eeb) Thanks [@jsimck](https://github.com/jsimck)! - Added missing npmignore
+
 ## 0.0.7
 
 ### Patch Changes
