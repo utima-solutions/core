@@ -9,7 +9,7 @@ const git = simpleGit();
 /**
  * Pulls changes and synces source branch into all target branches.
  */
-export async function syncBranches(target: string[], source: string) {
+export async function syncBranches(source: string, targets: string[] = []) {
   // Check if the repository is clean
   if (!(await git.status()).isClean()) {
     return logger.error(
@@ -25,7 +25,7 @@ export async function syncBranches(target: string[], source: string) {
 
   logger.info('Pull latest changes from origin');
 
-  for (const branch of [source, ...target]) {
+  for (const branch of [source, ...targets]) {
     // Checkout source branch
     logger.cmd(`git checkout ${branch}`);
     await git.checkout(branch);
@@ -35,17 +35,17 @@ export async function syncBranches(target: string[], source: string) {
     await git.pull('origin', branch, { '--rebase': null });
   }
 
-  if (target.length === 0) {
+  if (targets.length === 0) {
     return logger.info('No target branches specified, exiting sync...');
   }
 
   logger.info(
-    `Distribute '${source}' -> ${target.map(v => `'${v}'`).join(',')}`,
+    `Distribute '${source}' -> ${targets.map(v => `'${v}'`).join(',')}`,
   );
 
-  for (const branch of target) {
-    logger.cmd(`git checkout ${target}`);
-    await git.checkout(target);
+  for (const branch of targets) {
+    logger.cmd(`git checkout ${targets}`);
+    await git.checkout(targets);
 
     // Pull latest changes
     logger.cmd(`git merge origin/${source} '${branch}`);
@@ -69,10 +69,10 @@ export function syncBranchesCreator(program: Command) {
     .command('sync-branches')
     .description('Distribute branch state to multiple branches')
     .option('-s, --source <source>', 'source branch')
-    .option('-t, --target [targets...]', 'target branches')
+    .option('-t, --targets [targets...]', 'target branches', [])
     .action(async options => {
-      const { target = [], source } = options as {
-        target: string[];
+      const { targets, source } = options as {
+        targets: string[];
         source: string;
       };
 
@@ -82,6 +82,6 @@ export function syncBranchesCreator(program: Command) {
         );
       }
 
-      await syncBranches(target, source);
+      await syncBranches(source, targets);
     });
 }

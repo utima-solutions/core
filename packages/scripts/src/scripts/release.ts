@@ -30,14 +30,12 @@ async function extractVersions() {
 }
 
 /**
- * Synces main and dev branches and runs release process
- * using changesets when changesets are used. If not it
- * will exit.
+ * Synces working branches and runs release process using changesets.
  */
 async function release(
-  targets: string[],
   source: string,
-  skipPublishing: boolean,
+  targets: string[] = [],
+  skipPublishing = false,
 ) {
   const changesetsPath = path.resolve(process.cwd(), '.changeset');
 
@@ -59,7 +57,7 @@ async function release(
   }
 
   // Sync branches
-  await syncBranches(targets, source);
+  await syncBranches(source, targets);
 
   // Checkout source (main)
   await git.checkout(source);
@@ -97,19 +95,15 @@ export function releaseCreator(program: Command) {
       'Runs process of syncing git branches and releasing new version changesets',
     )
     .option('-s, --source <source>', 'source branch')
-    .option('-t, --target [targets...]', 'target branches')
-    .option('-n, --no-publish', 'skip publishing')
+    .option('-t, --targets [targets...]', 'target branches', [])
+    .option('-n, --no-publish', 'skip publishing', false)
     .action(async options => {
-      const {
-        target = [],
-        noPublish = false,
-        source,
-      } = options as {
-        target: string[];
+      const { targets, noPublish, source } = options as {
+        targets: string[];
         source: string;
         noPublish: boolean;
       };
 
-      await release(target, source, noPublish);
+      await release(source, targets, noPublish);
     });
 }
