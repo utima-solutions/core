@@ -1,5 +1,12 @@
 # @utima/scripts
 
+## 0.1.0
+
+### Minor Changes
+
+- [`ee1ca01`](https://github.com/utima-solutions/core/commit/ee1ca015085dd7d2cb02e6a11b8be282f2065b5d) Thanks [@jsimck](https://github.com/jsimck)! - - Release script: sync branches after release
+  - Release script now accepts completely different arguments
+
 ## 0.0.8
 
 ### Patch Changes
