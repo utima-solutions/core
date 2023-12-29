@@ -30,13 +30,9 @@ async function extractVersions() {
 }
 
 /**
- * Synces working branches and runs release process using changesets.
+ * Runs process of syncing versions and doing release.
  */
-async function release(
-  source: string,
-  targets: string[] = [],
-  skipPublishing = false,
-) {
+async function release(main: string, dev: string, publish = false) {
   const changesetsPath = path.resolve(process.cwd(), '.changeset');
 
   // Check if changesets are initialized in the repository
@@ -56,11 +52,11 @@ async function release(
     );
   }
 
-  // Sync branches
-  await syncBranches(source, targets);
+  // Merge dev to main
+  await syncBranches(dev, [main]);
 
-  // Checkout source (main)
-  await git.checkout(source);
+  // Checkout main
+  await git.checkout(main);
 
   // Create versions using changesets & update package-lock
   await execa('npx', ['changeset', 'version'], { stdio: 'inherit' });
@@ -75,14 +71,17 @@ async function release(
   await git.add('.');
   await git.commit(`🚀 Publish - ${versions}`);
   await execa('npx', ['changeset', 'tag'], { stdio: 'inherit' });
-  await git.push('origin', source, { '--follow-tags': null });
+  await git.push('origin', main, { '--follow-tags': null });
 
   // Publish using changesets
-  if (!skipPublishing) {
+  if (publish) {
     await execa('npx', ['changeset', 'publish', '--no-git-tag'], {
       stdio: 'inherit',
     });
   }
+
+  // Sync main to dev
+  await syncBranches(main, [dev]);
 }
 
 /**
@@ -92,18 +91,18 @@ export function releaseCreator(program: Command) {
   program
     .command('release')
     .description(
-      'Runs process of syncing git branches and releasing new version changesets',
+      'Runs process of syncing git branches and releasing new version using changesets',
     )
-    .option('-s, --source <source>', 'source branch')
-    .option('-t, --targets [targets...]', 'target branches', [])
-    .option('-n, --skip-publish', 'skip publishing')
+    .option('-m, --main <main>', 'main branch', 'main')
+    .option('-d, --dev <dev>', 'dev branch', 'dev')
+    .option('-p, --publish', 'publish using changesets', false)
     .action(async options => {
-      const { targets, skipPublish, source } = options as {
-        targets: string[];
-        source: string;
-        skipPublish: boolean;
+      const { main, publish, dev } = options as {
+        main: string;
+        dev: string;
+        publish: boolean;
       };
 
-      await release(source, targets, skipPublish);
+      await release(main, dev, publish);
     });
 }
