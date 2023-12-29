@@ -10,7 +10,7 @@
     "release": "npm run release:prepare && npm run release:push && changeset publish",
     "release:check": "test $(git branch --show-current) != 'master' && echo 'Switch to master branch, please.' && exit 1 || test \"`git status . --porcelain`\" && echo 'Uncommitted changes found. Aborting release.' && exit 1 || exit 0",
     "release:prepare": "changeset version && npm i --package-lock-only --ignore-scripts",
-    "release:push": "git add . && git commit -m 'Publish' && changeset tag && git push --follow-tags",
+    "release:push": "git add . && git commit -m '🚀 Publish' && changeset tag && git push --follow-tags",
     "release:rc:enter": "changeset pre enter rc",
     "release:rc:exit": "changeset pre exit"
   },
