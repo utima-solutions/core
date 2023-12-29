@@ -35,10 +35,10 @@ npx utima ci
 Synces working branches and runs release process using changesets.
 
 ```bash
-npx utima release -s main -t dev hotfix
+npx utima release -m main -d dev
 
-# Without publishing
-npx utima release -s main -t dev hotfix -n
+# With publishing
+npx utima release -p -m main -d dev
 ```
 
 ### `sync-branches`
@@ -46,5 +46,5 @@ npx utima release -s main -t dev hotfix -n
 Pulls changes and synces source branch into all target branches.
 
 ```bash
-npx utima release -s main -t dev
+npx utima release -s main -t dev hotfix rc
 ```
