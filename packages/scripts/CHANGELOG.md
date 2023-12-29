@@ -1,5 +1,11 @@
 # @utima/scripts
 
+## 0.0.6
+
+### Patch Changes
+
+- [`8ba0bb0`](https://github.com/utima-solutions/core/commit/8ba0bb02d392bf28628f99f43ac57cbe8698e49d) Thanks [@jsimck](https://github.com/jsimck)! - Re-release
+
 ## 0.0.5
 
 ### Patch Changes
