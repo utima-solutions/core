@@ -96,14 +96,14 @@ export function releaseCreator(program: Command) {
     )
     .option('-s, --source <source>', 'source branch')
     .option('-t, --targets [targets...]', 'target branches', [])
-    .option('-n, --no-publish', 'skip publishing', false)
+    .option('-n, --skip-publish', 'skip publishing')
     .action(async options => {
-      const { targets, noPublish, source } = options as {
+      const { targets, skipPublish, source } = options as {
         targets: string[];
         source: string;
-        noPublish: boolean;
+        skipPublish: boolean;
       };
 
-      await release(source, targets, noPublish);
+      await release(source, targets, skipPublish);
     });
 }
