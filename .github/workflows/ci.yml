@@ -21,6 +21,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Cache dependencies
         id: cache
@@ -36,3 +37,9 @@ jobs:
 
       - name: Turbo
         run: npx turbo run build lint
+
+      - name: Deploy
+        if: endsWith(github.ref, 'main')
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx changeset publish --no-git-tag
