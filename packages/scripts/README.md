@@ -38,7 +38,7 @@ Synces working branches and runs release process using changesets.
 npx utima release --source main --target dev hotfix
 
 # Without publishing
-npx utima release --source main ---target dev hotfix --no-publish
+npx utima release --source main --target dev hotfix --no-publish
 ```
 
 ### `sync-branches`
