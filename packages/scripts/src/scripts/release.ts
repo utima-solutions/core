@@ -64,7 +64,7 @@ async function release(
 
   // Create versions using changesets & update package-lock
   await execa('npx', ['changeset', 'version'], { stdio: 'inherit' });
-  await execa('npm', ['--package-lock-only', '--ignore-scripts'], {
+  await execa('npm', ['install', '--package-lock-only', '--ignore-scripts'], {
     stdio: 'inherit',
   });
 
