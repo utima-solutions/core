@@ -32,7 +32,7 @@ async function extractVersions() {
 /**
  * Runs process of syncing versions and doing release.
  */
-async function release(main: string, dev: string, publish = false) {
+async function release(main: string, dev?: string, publish = false) {
   const changesetsPath = path.resolve(process.cwd(), '.changeset');
 
   // Check if changesets are initialized in the repository
@@ -52,8 +52,13 @@ async function release(main: string, dev: string, publish = false) {
     );
   }
 
-  // Merge dev to main
-  await syncBranches(dev, [main]);
+  if (dev) {
+    // Pull latest and merge dev to main
+    await syncBranches(dev, [main]);
+  } else {
+    // Pull latest changes from origin
+    await syncBranches(main, []);
+  }
 
   // Checkout main
   await git.checkout(main);
@@ -81,7 +86,9 @@ async function release(main: string, dev: string, publish = false) {
   }
 
   // Sync main to dev
-  await syncBranches(main, [dev]);
+  if (dev) {
+    await syncBranches(main, [dev]);
+  }
 }
 
 /**
