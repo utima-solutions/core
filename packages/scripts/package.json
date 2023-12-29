@@ -1,0 +1,20 @@
+{
+  "name": "@utima/scripts",
+  "description": "A comprehensive collection of scripts for Utima projects, providing a CLI tool (utima) for running and managing various tasks.",
+  "version": "0.0.1",
+  "type": "module",
+  "bin": {
+    "utima": "./dist/bin/utima-scripts.js"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -w",
+    "lint": "ESLINT_USE_FLAT_CONFIG=true eslint -c ../../eslint.config.mjs './**/*.{js,ts,jsx,tsx,cjs,mjs}'"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "execa": "^8.0.1",
+    "simple-git": "^3.21.0"
+  }
+}
