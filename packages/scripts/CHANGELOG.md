@@ -1,5 +1,11 @@
 # @utima/scripts
 
+## 0.0.7
+
+### Patch Changes
+
+- [`54ee349`](https://github.com/utima-solutions/core/commit/54ee3491b4f43abd188e2de97eb8477f52979147) Thanks [@jsimck](https://github.com/jsimck)! - Fixed skip-publish option in release script
+
 ## 0.0.6
 
 ### Patch Changes
