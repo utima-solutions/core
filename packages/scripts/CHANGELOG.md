@@ -1,5 +1,11 @@
 # @utima/scripts
 
+## 0.1.2
+
+### Patch Changes
+
+- [`cad2eb6`](https://github.com/utima-solutions/core/commit/cad2eb6fe60a99e0b2882c37b63dd5a43ada65af) Thanks [@jsimck](https://github.com/jsimck)! - Changed rebase to --ff-only in sync-branches
+
 ## 0.1.1
 
 ### Patch Changes
