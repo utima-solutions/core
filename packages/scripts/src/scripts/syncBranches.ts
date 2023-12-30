@@ -31,8 +31,8 @@ export async function syncBranches(source: string, targets: string[] = []) {
     await git.checkout(branch);
 
     // Pull latest changes
-    logger.cmd(`git pull origin ${branch} --rebase`);
-    await git.pull('origin', branch, { '--rebase': null });
+    logger.cmd(`git pull origin ${branch} --ff-only`);
+    await git.pull('origin', branch, { '--ff-only': null });
   }
 
   if (targets.length === 0) {
