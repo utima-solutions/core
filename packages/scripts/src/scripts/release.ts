@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import chalk from 'chalk';
 import { Command } from 'commander';
-import { execa } from 'execa';
+import { $ } from 'execa';
 import { simpleGit } from 'simple-git';
 
 import { syncBranches } from './syncBranches.js';
@@ -11,6 +11,7 @@ import { logger } from '../lib/logger.js';
 import { parsePkgJson } from '../lib/utils.js';
 
 const git = simpleGit();
+const $$ = $({ stdio: 'inherit' });
 
 /**
  * Extracts versions from package.json files.
@@ -64,10 +65,8 @@ async function release(main: string, dev?: string, publish = false) {
   await git.checkout(main);
 
   // Create versions using changesets & update package-lock
-  await execa('npx', ['changeset', 'version'], { stdio: 'inherit' });
-  await execa('npm', ['install', '--package-lock-only', '--ignore-scripts'], {
-    stdio: 'inherit',
-  });
+  await $$`npx changeset version`;
+  await $$`npm install --package-lock-only --ignore-scripts`;
 
   // Extract change package versions
   const versions = await extractVersions();
@@ -75,14 +74,12 @@ async function release(main: string, dev?: string, publish = false) {
   // Commit and push changes
   await git.add('.');
   await git.commit(`🚀 Publish - ${versions}`);
-  await execa('npx', ['changeset', 'tag'], { stdio: 'inherit' });
-  await git.push('origin', main, { '--follow-tags': null });
+  await $$`npx changeset tag`;
+  await git.push({ '--follow-tags': null });
 
   // Publish using changesets
   if (publish) {
-    await execa('npx', ['changeset', 'publish', '--no-git-tag'], {
-      stdio: 'inherit',
-    });
+    await $$`npx changeset publish --no-git-tag`;
   }
 
   // Sync main to dev

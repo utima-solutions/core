@@ -2,10 +2,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { Command } from 'commander';
-import { execa } from 'execa';
+import { $ } from 'execa';
 import { CleanOptions, simpleGit } from 'simple-git';
 
 const git = simpleGit();
+const $$ = $({ stdio: 'inherit' });
 
 /**
  * Removes all files from current git repository (including ignored files)
@@ -31,6 +32,6 @@ export function cleanInstallCreator(program: Command) {
         : 'i';
 
       // Install dependencies
-      await execa('npm', [installCommand], { stdio: 'inherit' });
+      await $$`npm ${installCommand}`;
     });
 }
