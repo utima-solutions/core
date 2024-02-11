@@ -1,7 +1,7 @@
 {
   "name": "@utima/scripts",
   "description": "A comprehensive collection of scripts for Utima projects, providing a CLI tool (utima) for running and managing various tasks.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "type": "module",
   "bin": {
     "utima": "./dist/bin/utima-scripts.js"

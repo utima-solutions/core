@@ -1,5 +1,11 @@
 # @utima/scripts
 
+## 0.1.3
+
+### Patch Changes
+
+- [`0e7ccd9`](https://github.com/utima-solutions/core/commit/0e7ccd9078cbd00ecae3b27892b2b27105763538) Thanks [@jsimck](https://github.com/jsimck)! - Dropped execa in place of $ for custom commands
+
 ## 0.1.2
 
 ### Patch Changes
