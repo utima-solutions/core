@@ -13,6 +13,13 @@ import { parsePkgJson } from '../lib/utils.js';
 const git = simpleGit();
 const $$ = $({ stdio: 'inherit' });
 
+export type ReleaseScriptParams = {
+  main: string;
+  dev: string;
+  publish: boolean;
+  pnpm: boolean;
+};
+
 /**
  * Extracts versions from package.json files.
  */
@@ -33,7 +40,9 @@ async function extractVersions() {
 /**
  * Runs process of syncing versions and doing release.
  */
-async function release(main: string, dev?: string, publish = false) {
+async function release({ dev, main, pnpm, publish }: ReleaseScriptParams) {
+  const exec = pnpm ? 'pnpm exec' : 'npx';
+  const pkgExecutable = pnpm ? 'pnpm' : 'npm';
   const changesetsPath = path.resolve(process.cwd(), '.changeset');
 
   // Check if changesets are initialized in the repository
@@ -64,9 +73,13 @@ async function release(main: string, dev?: string, publish = false) {
   // Checkout main
   await git.checkout(main);
 
-  // Create versions using changesets & update package-lock
-  await $$`npx changeset version`;
-  await $$`npm install --package-lock-only --ignore-scripts`;
+  // Create versions using changesets
+  await $$`${exec} changeset version`;
+
+  // Update package-lock.json (pnpm doesn't need this)
+  if (!pnpm) {
+    await $$`npm install --package-lock-only --ignore-scripts`;
+  }
 
   // Extract change package versions
   const versions = await extractVersions();
@@ -74,12 +87,12 @@ async function release(main: string, dev?: string, publish = false) {
   // Commit and push changes
   await git.add('.');
   await git.commit(`🚀 Publish - ${versions}`);
-  await $$`npx changeset tag`;
+  await $$`${exec} changeset tag`;
   await git.push({ '--follow-tags': null });
 
   // Publish using changesets
   if (publish) {
-    await $$`npx changeset publish --no-git-tag`;
+    await $$`${exec} changeset publish --no-git-tag`;
   }
 
   // Sync main to dev
@@ -100,13 +113,8 @@ export function releaseCreator(program: Command) {
     .option('-m, --main <main>', 'main branch', 'main')
     .option('-d, --dev <dev>', 'dev branch', 'dev')
     .option('-p, --publish', 'publish using changesets', false)
+    .option('-n, --pnpm', 'use pnpm instead of npm', false)
     .action(async options => {
-      const { main, publish, dev } = options as {
-        main: string;
-        dev: string;
-        publish: boolean;
-      };
-
-      await release(main, dev, publish);
+      await release(options);
     });
 }
