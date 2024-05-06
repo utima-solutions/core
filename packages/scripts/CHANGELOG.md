@@ -1,5 +1,11 @@
 # @utima/scripts
 
+## 0.2.0
+
+### Minor Changes
+
+- [`bc6e927`](https://github.com/utima-solutions/core/commit/bc6e9274188eb8e60eca0ad3dbeb393d5f62b21b) Thanks [@jsimck](https://github.com/jsimck)! - Added support for pnpm
+
 ## 0.1.3
 
 ### Patch Changes
