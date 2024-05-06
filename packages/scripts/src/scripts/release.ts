@@ -42,7 +42,6 @@ async function extractVersions() {
  */
 async function release({ dev, main, pnpm, publish }: ReleaseScriptParams) {
   const exec = pnpm ? 'pnpm exec' : 'npx';
-  const pkgExecutable = pnpm ? 'pnpm' : 'npm';
   const changesetsPath = path.resolve(process.cwd(), '.changeset');
 
   // Check if changesets are initialized in the repository
